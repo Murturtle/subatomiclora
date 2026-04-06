@@ -221,6 +221,7 @@ class Connection extends EventEmitter {
     async sendCommandSendRawData(path, rawData) {
         const data = new BufferWriter();
         data.writeByte(Constants.CommandCodes.SendRawData);
+
         data.writeByte(path.length);
         data.writeBytes(path);
         data.writeBytes(rawData);

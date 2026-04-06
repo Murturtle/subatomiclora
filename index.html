@@ -3,14 +3,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Codec2 Vanilla UI</title>
+    <title>subatomiclora</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="app-container">
         <header>
-            <h1>Codec2 Web Tool</h1>
-            <p>Voice compression via Emscripten</p>
+            <h1>subatomiclora</h1>
+            <p>Voice compression using Emscripten and MeshCore</p>
         </header>
 
         <section class="config-card">
@@ -20,20 +20,26 @@
                 <option value="2400">2400</option>
                 <option value="1600">1600</option>
                 <option value="1300">1300</option>
-                <option value="700C" selected>700C (Standard)</option>
-                <option value="450">450 (Ultra Low)</option>
+                <option value="700C">700C</option>
+                <option value="450" selected>450 (Lowest)</option>
             </select>
         </section>
 
         <div class="grid">
             <div class="card encoder">
-                <h2> Mic Encoder</h2>
+                <h2>Mic Encoder</h2>
                 <div class="controls">
                     <button id="start-btn" class="btn-primary">Start Recording</button>
-                    <button id="stop-btn" class="btn-secondary" disabled>Stop & Encode</button>
+                    <button id="stop-btn" class="btn-secondary" disabled>Stop Recording</button>
                 </div>
-                <label>Encoded Base64:</label>
+                
+                <button id="transmit-btn" disabled style="background: #007bff; color: white; margin-top: 10px; padding: 10px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; opacity: 0.5;">
+                    Transmit to #hehe
+                </button>
+
+                <label style="margin-top: 10px; display: block;">Encoded Base64:</label>
                 <textarea id="output-text" readonly placeholder="Output appears here..."></textarea>
+                
                 <div id="preview-container" class="hidden">
                     <span>Original Mic Preview:</span>
                     <audio id="audio-preview" controls></audio>
@@ -42,9 +48,9 @@
 
             <div class="card decoder">
                 <h2>Data Decoder</h2>
-                <label>Paste Base64 Data:</label>
-                <textarea id="decode-input" placeholder="Paste encoded bits here..."></textarea>
-                <button id="decode-btn" class="btn-success">Decode & Play</button>
+                <label>Paste Base64 Data or JSON Chunk:</label>
+                <textarea id="decode-input" placeholder="Paste bits here..."></textarea>
+                <button id="decode-btn" class="btn-success" style="background: #28a745; color: white; padding: 10px; border: none; border-radius: 4px; font-weight: bold; width: 100%; cursor: pointer;">Decode & Play</button>
                 <div id="decode-preview-container" class="hidden">
                     <span>Codec2 Result:</span>
                     <audio id="decode-playback" controls></audio>
@@ -54,13 +60,16 @@
             <div class="card mc">
                 <h2>BLE Connection</h2>
                 <div class="controls">
-                    <button id="ble-connect-btn" class="btn-primary">Connect BLE</button>
+                    <button id="ble-connect-btn" class="btn-primary" style="background: #007bff; color: white; padding: 10px; border: none; border-radius: 4px; font-weight: bold; width: 100%; cursor: pointer;">Connect BLE</button>
                 </div>
-                <div id="ble-status" class="mt-2 text-muted" style="font-size: 0.8rem;">Status: Disconnected</div>
+                <div id="ble-status" class="status-text" style="margin-top: 10px; font-size: 0.8rem; color: #666;">Status: Disconnected</div>
             </div>
 
             <div class="card recv">
-                <h2>Recieved Audio</h2>
+                <h2>Received Audio</h2>
+                <div id="recv-log" style="font-size: 0.8rem; color: #444;">
+                    Waiting for #hehe traffic...
+                </div>
             </div>
         </div>
     </div>
@@ -68,6 +77,6 @@
     <script src="./build/c2enc.js"></script>
     <script src="./build/c2dec.js"></script>
     <script src="./build/sox.js"></script>
-    <script src="main.js"></script>
+    <script type="module" src="main.js"></script>
 </body>
 </html>
