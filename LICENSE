@@ -1,0 +1,11 @@
+Parts of this project are licensed under LGPL 2.1 and other parts are licensed under GPL 2.0.
+
+The following parts are produced from Codec2, and are thus licensed under LGPL 2.1
+- c2dec.js + c2dec.wasm
+- c2enc.js + c2enc.wasm
+- codec2.patch
+
+The following parts are produced from or use Sox, and are thus licensed under GPL 2.0
+- sox.js + sox.wasm
+- main.js
+- index.html

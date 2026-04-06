@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Codec2 Vanilla UI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Codec2 Web Tool</h1>
+            <p>Voice compression via Emscripten</p>
+        </header>
+
+        <section class="config-card">
+            <label for="mode-select">Codec Bitrate Mode</label>
+            <select id="mode-select">
+                <option value="3200">3200 (Highest)</option>
+                <option value="2400">2400</option>
+                <option value="1600">1600</option>
+                <option value="1300">1300</option>
+                <option value="700C" selected>700C (Standard)</option>
+                <option value="450">450 (Ultra Low)</option>
+            </select>
+        </section>
+
+        <div class="grid">
+            <div class="card encoder">
+                <h2> Mic Encoder</h2>
+                <div class="controls">
+                    <button id="start-btn" class="btn-primary">Start Recording</button>
+                    <button id="stop-btn" class="btn-secondary" disabled>Stop & Encode</button>
+                </div>
+                <label>Encoded Base64:</label>
+                <textarea id="output-text" readonly placeholder="Output appears here..."></textarea>
+                <div id="preview-container" class="hidden">
+                    <span>Original Mic Preview:</span>
+                    <audio id="audio-preview" controls></audio>
+                </div>
+            </div>
+
+            <div class="card decoder">
+                <h2>Data Decoder</h2>
+                <label>Paste Base64 Data:</label>
+                <textarea id="decode-input" placeholder="Paste encoded bits here..."></textarea>
+                <button id="decode-btn" class="btn-success">Decode & Play</button>
+                <div id="decode-preview-container" class="hidden">
+                    <span>Codec2 Result:</span>
+                    <audio id="decode-playback" controls></audio>
+                </div>
+            </div>
+
+            <div class="card mc">
+                <h2>BLE Connection</h2>
+                <div class="controls">
+                    <button id="ble-connect-btn" class="btn-primary">Connect BLE</button>
+                </div>
+                <div id="ble-status" class="mt-2 text-muted" style="font-size: 0.8rem;">Status: Disconnected</div>
+            </div>
+
+            <div class="card recv">
+                <h2>Recieved Audio</h2>
+            </div>
+        </div>
+    </div>
+
+    <script src="./build/c2enc.js"></script>
+    <script src="./build/c2dec.js"></script>
+    <script src="./build/sox.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
